@@ -1,7 +1,7 @@
 const User = require("./../models/user");
 const asyncHandler = require('express-async-handler')
-const { generateToken } = require("../config/jwt");
-const { createRefreshJWT } = require("../config/refreshJWT");
+const { generateToken, createRefreshJWT } = require("../config/jwt");
+//const { createRefreshJWT } = require("../config/");
 const { successResponse, errorResponse } = require("../utils/response");
 
 exports.signup = async (req, res, next) => {
