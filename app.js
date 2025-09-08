@@ -1,10 +1,12 @@
-import express from 'express';
-import cors from 'cors';
-import dbConnect from './config/dbConnect';
-import notFound from './middleware/not-found';
-import taskRoute from './route/taskRoute';
-import authRoute from './route/authRoute';
-import dotenv from 'dotenv';
+const express = require('express');
+const dbConnect = require('./config/dbConnect');
+const taskRoute = require('./route/taskRoute');
+const authRoute = require('./route/authRoute');
+const dotenv = require('dotenv');
+const notFound = require('./middleware/not-found');
+const cors = require('cors');
+
+
 
 dotenv.config();
 const port = process.env.PORT || 5000;
