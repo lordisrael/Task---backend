@@ -3,7 +3,10 @@ const dbConnect = require('./config/dbConnect');
 const taskRoute = require('./route/taskRoute');
 const authRoute = require('./route/authRoute');
 const dotenv = require('dotenv');
+const cookieParser = require('cookie-parser')
 const notFound = require('./middleware/not-found');
+
+const helmet = require('helmet')
 const cors = require('cors');
 
 
@@ -12,8 +15,12 @@ dotenv.config();
 const port = process.env.PORT || 5000;
 const app = express();
 
-app.use(express.json());
+app.use(helmet());
 app.use(cors());
+
+app.use(express.json());
+app.use(cookieParser());
+
 
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/tasks", taskRoute);
