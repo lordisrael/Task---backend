@@ -1,6 +1,7 @@
 const User = require("./../models/user");
 const asyncHandler = require('express-async-handler')
 const { generateToken } = require("../config/jwt");
+const { createRefreshJWT } = require("../config/refreshJWT");
 const { successResponse, errorResponse } = require("../utils/response");
 
 exports.signup = async (req, res, next) => {
@@ -49,7 +50,9 @@ exports.login = async (req, res, next) => {
 
 exports.logout = asyncHandler(async(req, res) => {
     const cookie = req.cookies
-    if(!cookie.refreshToken) throw new UnauthenticatedError('No refresh token found')
+  if(!cookie.refreshToken) {
+    return res.status(401).json(errorResponse('No refresh token found'));
+  }
     const refreshToken = cookie.refreshToken
     const user = await User.findOne({refreshToken})
     if(!user) {
